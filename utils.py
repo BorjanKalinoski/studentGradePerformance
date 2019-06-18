@@ -1,4 +1,60 @@
 import operator
+
+
+def clean_math_data(data):
+    print('before cleaning data')
+    print(data)
+    print("Shape is:")
+    print(data.shape)
+
+    print("Count is:")
+    print(data.count())
+    data.loc[data['sex'] == 'F', 'sex'] = 1
+    data.loc[data['sex'] == 'M', 'sex'] = 0
+
+    data.loc[data['school'] == 'GP', 'school'] = 1
+    data.loc[data['school'] == 'MS', 'school'] = 0
+
+    data.loc[data['address'] == 'U', 'address'] = 1
+    data.loc[data['address'] == 'R', 'address'] = 0
+
+    data.loc[data['reason'] == 'course', 'reason'] = 0
+    data.loc[data['reason'] == 'home', 'reason'] = 1
+    data.loc[data['reason'] == 'reputation', 'reason'] = 2
+    data.loc[data['reason'] == 'other', 'reason'] = 3
+
+    data.loc[data['schoolsup'] == 'yes', 'schoolsup'] = 1
+    data.loc[data['schoolsup'] == 'no', 'schoolsup'] = 0
+
+    data.loc[data['famsup'] == 'yes', 'famsup'] = 1
+    data.loc[data['famsup'] == 'no', 'famsup'] = 0
+
+    data.loc[data['paid'] == 'no', 'paid'] = 0
+    data.loc[data['paid'] == 'yes', 'paid'] = 1
+
+    data.loc[data['activities'] == 'yes', 'activities'] = 1
+    data.loc[data['activities'] == 'no', 'activities'] = 0
+
+    data.loc[data['nursery'] == 'no', 'nursery'] = 0
+    data.loc[data['nursery'] == 'yes', 'nursery'] = 1
+
+    data.loc[data['higher'] == 'no', 'higher'] = 0
+    data.loc[data['higher'] == 'yes', 'higher'] = 1
+
+    data.loc[data['internet'] == 'no', 'internet'] = 0
+    data.loc[data['internet'] == 'yes', 'internet'] = 1
+
+    data.loc[data['romantic'] == 'no', 'romantic'] = 0
+    data.loc[data['romantic'] == 'yes', 'romantic'] = 1
+    print('after cleaning data')
+    print(data)
+    print("Shape is:")
+    print(data.shape)
+
+    print("Count is:")
+    print(data.count())
+
+
 def clean_data(data):
     # print('before cleaning data')
     # print(data)

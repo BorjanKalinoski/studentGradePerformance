@@ -1,34 +1,51 @@
 import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+from sklearn import metrics
+from sklearn.model_selection import train_test_split
 import utils
-from sklearn import linear_model, preprocessing, tree
+import visualize
 
-# import visualize
+df = pd.read_csv('student-mat.csv')
+utils.clean_math_data(df)
+# visualize.show_new_graphs(df)
+print(df.shape)
 
-# df = pd.read_csv('studentsperformance.csv', engine='python')
+features = ['G1', 'G2', 'age','reason','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health','absences']
+labels = ['G3']
 
-# utils.clean_data(data=df)
+X = df[features].values
+y = df[labels[0]].values
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)  # training the algorithm
 
-target = df['math score'].values
-features = df[['test preparation course', 'lunch', 'gender', 'parental level of education']].values
+coeff_df = pd.DataFrame(regressor.coef_, features, columns=['Coefficient'])
 
-# solver : str, {‘newton-cg’, ‘lbfgs’, ‘liblinear’, ‘sag’, ‘saga’},
-# multi_class : str, {‘ovr’, ‘multinomial’, ‘auto’}, optional (default=’ovr’)
+print(coeff_df)
 
-classifier = linear_model.LogisticRegression(multi_class='multinomial', solver='newton-cg')
-classifier_ = classifier.fit(features, target)
+# # To retrieve the intercept:
+# print(regressor.intercept_)
+# # For retrieving the slope:
+# print(regressor.coef_)
 
-print('Logistic Regression!')
-print(classifier_.score(features, target))
+y_pred = regressor.predict(X_test)
 
-#
-# poly = preprocessing.PolynomialFeatures(degree=2)
-# poly_features = poly.fit_transform(features)
-#
-# classifier_ = classifier.fit(poly_features, target)
-# print(classifier_.score(poly_features, target))
-#
-# decision_tree = tree.DecisionTreeClassifier(random_state=1)
-# decision_tree_ = decision_tree.fit(features, target)
-# print(decision_tree_.score(features, target))
+df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
+df1 = df.head(25)
+
+df1.plot(kind='bar', figsize=(10, 8))
+plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
+plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
+plt.show()
+
+plt.scatter(X_test[:, 0], y_test, color='gray')
+plt.plot(X_test, y_pred, color='red', linewidth=2)
+plt.show()
+
+print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
