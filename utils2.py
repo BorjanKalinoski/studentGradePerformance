@@ -11,13 +11,13 @@ def createAbsenceGroups(data):
     print(data.count())
 
     gr1Lower = 0
-    gr1Upper = 3  #grupa kade imaat najmalce otsustvo e gr1
+    gr1Upper = 15  #grupa kade imaat najmalce otsustvo e gr1
 
-    gr2Lower = 4
-    gr2Upper = 7
+    gr2Lower = 16
+    gr2Upper = 31
 
-    gr3Lower = 8
-    gr3Upper = 11
+    gr3Lower = 32
+    gr3Upper = 47
 
     
     data.loc[operator.and_(data['absences']>=gr1Lower,data['absences']<=gr1Upper),'absenceGr']=1

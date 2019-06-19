@@ -6,16 +6,16 @@ import matplotlib.pyplot as plt
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import utils
-import utils2
+from utils2 import createAbsenceGroups
 import visualize
 
 df = pd.read_csv('student-mat.csv')
 utils.clean_math_data(df)
-utils2.createAbsenceGroups(df)
-# visualize.show_new_graphs(df)
+createAbsenceGroups(df)
+visualize.show_new_graphs(df)
 print(df.shape)
 
-features = ['G1', 'G2', 'age','reason','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health','absences']
+features = ['absenceGr', 'age','reason','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health',]
 labels = ['G3']
 
 X = df[features].values
