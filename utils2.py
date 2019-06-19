@@ -17,7 +17,7 @@ def createAbsenceGroups(data):
     gr2Upper = 7
 
     gr3Lower = 8
-    gr3Upper = 11 #grupa kaj ima najvekej otsustvo e gr3
+    gr3Upper = 11
 
     
     data.loc[operator.and_(data['absences']>=gr1Lower,data['absences']<=gr1Upper),'absenceGr']=1
