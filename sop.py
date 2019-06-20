@@ -12,10 +12,15 @@ import visualize
 df = pd.read_csv('student-mat.csv')
 utils.clean_math_data(df)
 createAbsenceGroups(df)
-visualize.show_new_graphs(df)
+#visualize.show_new_graphs(df)
 print(df.shape)
 
-features = ['absenceGr', 'age','reason','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health',]
+#FEATURE SELECTION
+#site featuri se:
+#features = ['school', 'sex','age',	'address','famsize','Pstatus','Medu','Fedu','Mjob','Fjob','reason','guardian','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
+
+#features = ['G1','G2','absenceGr', 'age','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health',]
+features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime']
 labels = ['G3']
 
 X = df[features].values
@@ -38,7 +43,12 @@ print(coeff_df)
 y_pred = regressor.predict(X_test)
 
 df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
-df1 = df.head(25)
+df1 = df.head(300)
+
+#score determination
+print("-------Succes rate-------")
+print(regressor.score(X_test,y_test)*100,"%")
+print("-------------------------")
 
 df1.plot(kind='bar', figsize=(10, 8))
 plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')
