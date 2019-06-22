@@ -6,12 +6,11 @@ import matplotlib.pyplot as plt
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import utils
-from utils2 import createAbsenceGroups
 import visualize
 
 df = pd.read_csv('student-mat.csv')
 utils.clean_math_data(df)
-createAbsenceGroups(df)
+utils.createAbsenceGroups(df)
 #visualize.show_new_graphs(df)
 print(df.shape)
 
