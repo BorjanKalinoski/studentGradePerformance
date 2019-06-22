@@ -213,7 +213,7 @@ def show_new_graphs(df):
     
     plt.show()
     
-    #semi / FULL ABSENCE GRID
+    #FULL ABSENCE GRID_________________________
     plt.subplot2grid((3, 4), (0, 0) ,colspan=4)
     df['absences'].value_counts(normalize=False).plot(kind='bar', alpha=0.5)
     plt.title('Student number of school absences')
@@ -227,7 +227,7 @@ def show_new_graphs(df):
         df['G3'][df['absenceGr'] == x].plot(kind="kde")
     plt.title('Final grade wrt absence group')
     plt.legend(('1', '2', '3', '4'))
-    #semi
+    #FULL ABSENCE GRID ends____________________
     plt.show()
 
     plt.subplot2grid((3, 4), (0, 0))
