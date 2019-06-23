@@ -24,20 +24,22 @@ print(df.shape)
 
 #FEATURE SELECTION______________________________________
 #site featuri se:
-allfeatures = ['G1','G2','school', 'sex','age',	'address','Medu','Fedu','reason','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
+allfeatures = ['G1','G2','school', 'sex','age',	'address','Medu','Fedu','reason','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absenceGr']
 #features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc'] #dosega najdobar 83.12
 #features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc']
 labels = ['G3']
 y = df[labels[0]].values
 
-c=0
-maxscore = 0;
-for x in range(2,len(allfeatures)):
+maxscore = 0
+for x in range(11,len(allfeatures)):
     comb = combinations(allfeatures,x) #site mozhni kombinacii na featuri
     print("Klasa: ",x)
+    c=0
     for features in list(comb):  #tekovno feature kombinacija
         features=list(features)
-       
+        if 'G1' not in features or 'G2' not in features:
+            print("No more G1 G2, skipping the rest of class",x)
+            break #skokaj ovaa klasa ako vekej G1 i G2 gi nema na featuri
         X = df[features].values
         
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
@@ -51,11 +53,10 @@ for x in range(2,len(allfeatures)):
         if score > maxscore : 
             maxscore = score
             bestfeatures = features
-            xclass=x
-            print("__________________________________________________________________NEW MAXSCORE:",maxscore)
-            print("__________________________________________________________________NEW BESTFEATURES BELOW")
+            print("\nNEW MAXSCORE:",maxscore)
+            print("NEW BESTFEATURES BELOW")
             print(bestfeatures)
-            print("__________________________________________________________________element class:",xclass)
+            print("__________________element class:",x)
 
     
 
