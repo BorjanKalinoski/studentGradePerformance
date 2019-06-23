@@ -9,7 +9,6 @@ import utils
 import visualize
 import sys
 
-
 df = pd.read_csv('student-mat.csv')
 
 printed = "unprinted"
@@ -22,9 +21,9 @@ if len(sys.argv) > 1 and  sys.argv[1] == "visual":
 
 print(df.shape)
 
-#FEATURE SELECTION
+#FEATURE SELECTION______________________________________
 #site featuri se:
-#features = ['school', 'sex','age',	'address','famsize','Pstatus','Medu','Fedu','Mjob','Fjob','reason','guardian','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
+allfeatures = ['G1','G2','school', 'sex','age',	'address','Medu','Fedu','reason','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
 #features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc'] #dosega najdobar 83.12
 features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc']
 labels = ['G3']
@@ -51,7 +50,7 @@ y_pred = regressor.predict(X_test)
 df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
 df1 = df.head(300)
 
-#score determination
+#score determination_______________________________________________
 print("-------Succes rate (R^2 coefficient determination)-------")
 print(regressor.score(X_test,y_test)*100,"%")
 print( metrics.r2_score(y_test, y_pred)*100,"% (alternate method)")
