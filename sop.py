@@ -1,4 +1,4 @@
-#forked and pushed branch
+#forked
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -48,7 +48,7 @@ print(coeff_df)
 y_pred = regressor.predict(X_test)
 
 df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
-df1 = df.head(300)
+df1 = df.head(50)
 
 #score determination_______________________________________________
 print("-------Succes rate (R^2 coefficient determination)-------")

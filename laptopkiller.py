@@ -1,4 +1,4 @@
-#forked and pushed branch
+#bruteforce feature selection failure
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
