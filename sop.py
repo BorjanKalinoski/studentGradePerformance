@@ -1,3 +1,4 @@
+#forked
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -6,13 +7,25 @@ from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import utils
 import visualize
+import sys
 
 df = pd.read_csv('student-mat.csv')
-utils.clean_math_data(df)
-# visualize.show_new_graphs(df)
+
+printed = "unprinted"
+if len(sys.argv) > 2: printed=sys.argv[2] #'python sop.py <anything> printed' will print dataset before and after 
+utils.clean_math_data(df,printed) 
+utils.createAbsenceGroups(df,printed)
+
+if len(sys.argv) > 1 and  sys.argv[1] == "visual": 
+    visualize.show_new_graphs(df) # 'python sop.py visual' will show the graphs aswell
+
 print(df.shape)
 
-features = ['G1', 'G2', 'age','reason','reason','traveltime','studytime','nursery','higher','internet','Dalc','Walc','health','absences']
+#FEATURE SELECTION______________________________________
+#site featuri se:
+allfeatures = ['G1','G2','school', 'sex','age',	'address','Medu','Fedu','reason','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
+#features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc'] #dosega najdobar 83.12
+features = ['G1','G2','absenceGr','nursery','absences','traveltime','studytime','famsup','romantic','famrel','Walc','Dalc']
 labels = ['G3']
 
 X = df[features].values
@@ -35,7 +48,13 @@ print(coeff_df)
 y_pred = regressor.predict(X_test)
 
 df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
-df1 = df.head(25)
+df1 = df.head(50)
+
+#score determination_______________________________________________
+print("-------Succes rate (R^2 coefficient determination)-------")
+print(regressor.score(X_test,y_test)*100,"%")
+print( metrics.r2_score(y_test, y_pred)*100,"% (alternate method)")
+print("---------------------------------------------------------")
 
 df1.plot(kind='bar', figsize=(10, 8))
 plt.grid(which='major', linestyle='-', linewidth='0.5', color='green')

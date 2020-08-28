@@ -1,0 +1,37 @@
+
+features=['school','sex','age','address','famsize','Pstatus','Medu','Fedu','Mjob','Fjob','reason','guardian','traveltime','studytime','failures','schoolsup','famsup','paid','activities','nursery','higher','internet','romantic','famrel','freetime','goout','Dalc','Walc','health','absences']
+
+bad:
+reason 
+adrres 
+age bad
+sex less bad but still 
+Medu
+Fedu
+failures
+schoolsup
+activities
+higher
+internet 
+freetime
+goout
+Dalc
+
+good:
+absence + absenceGr
+nursery
+traveltime
+studytime
+famsup
+acivities
+romantic
+famrel
+Walc
+Dalc+Walc =even better
+
+not tried:
+famsize     unclean
+pstatus     unclean
+Mjob        unclean
+Fjob        unclean
+guardian    ucnlean

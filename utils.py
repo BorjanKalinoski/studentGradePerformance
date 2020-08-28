@@ -1,14 +1,14 @@
 import operator
 
+def clean_math_data(data,printed):  #novo
+    if(printed=="printed"):
+        print('_____________________________before cleaning data_____________________________')
+        print(data)
+        print("Shape is:")
+        print(data.shape)
 
-def clean_math_data(data):
-    print('before cleaning data')
-    print(data)
-    print("Shape is:")
-    print(data.shape)
-
-    print("Count is:")
-    print(data.count())
+        print("Count is:")
+        print(data.count())
     data.loc[data['sex'] == 'F', 'sex'] = 1
     data.loc[data['sex'] == 'M', 'sex'] = 0
 
@@ -46,16 +46,45 @@ def clean_math_data(data):
 
     data.loc[data['romantic'] == 'no', 'romantic'] = 0
     data.loc[data['romantic'] == 'yes', 'romantic'] = 1
-    print('after cleaning data')
-    print(data)
-    print("Shape is:")
-    print(data.shape)
+    
+    if(printed=="printed"):
+        print('_____________________________after cleaning data_____________________________')
+        print(data)
+        print("Shape is:")
+        print(data.shape)
 
-    print("Count is:")
-    print(data.count())
+        print("Count is:")
+        print(data.count())
 
 
-def clean_data(data):
+def createAbsenceGroups(data,printed):
+    gr1Lower = 0
+    gr1Upper = 15  #grupa kade imaat najmalce otsustvo e gr1
+
+    gr2Lower = 16
+    gr2Upper = 31
+
+    gr3Lower = 32
+    gr3Upper = 47
+
+    
+    data.loc[operator.and_(data['absences']>=gr1Lower,data['absences']<=gr1Upper),'absenceGr']=1
+    data.loc[operator.and_(data['absences']>=gr2Lower,data['absences']<=gr2Upper),'absenceGr']=2
+    data.loc[operator.and_(data['absences']>=gr3Lower,data['absences']<=gr3Upper),'absenceGr']=3
+    data.loc[data['absences']>gr3Upper,'absenceGr']=4
+    
+    if(printed=="printed"):
+        print('_____________________________after grpuping absence data_____________________________')
+        print(data)
+        print("Shape is:")
+        print(data.shape)
+
+        print("Count is:")
+        print(data.count())
+
+
+#-----------------------------------staro----------------------------------------------------
+def clean_data(data):  
     # print('before cleaning data')
     # print(data)
     # print("Shape is:")
@@ -104,3 +133,4 @@ def clean_data(data):
     #
     # print("Count is:")
     # print(data.count())
+
